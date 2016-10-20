@@ -191,6 +191,7 @@ def setup_GitHub_push(deploy_repo, auth_type='deploy_key', full_key_path='github
     local_deploy_branch_exists = deploy_branch in subprocess.check_output(['git', 'branch']).decode('utf-8').split()
     if new_deploy_branch or local_deploy_branch_exists:
         run(['git', 'checkout', deploy_branch])
+        run(['git', 'pull', 'doctr_remote', deploy_branch])
     else:
         run(['git', 'checkout', '-b', deploy_branch, '--track',
              'doctr_remote/{}'.format(deploy_branch)])
@@ -206,7 +207,6 @@ def deploy_branch_exists(deploy_branch='gh-pages'):
     """
     remote_name = 'doctr_remote'
     branch_names = subprocess.check_output(['git', 'branch', '-r']).decode('utf-8').split()
-    print(branch_names)
 
     return '{remote}/{branch}'.format(remote=remote_name,
                                       branch=deploy_branch) in branch_names
@@ -344,7 +344,6 @@ def push_docs(deploy_branch='gh-pages'):
     """
 
     print("Pulling")
-    run(['git', 'pull', 'doctr_remote', deploy_branch])
+    run(['git', 'pull'])
     print("Pushing commit")
-    run(['git', 'repack'])
     run(['git', 'push', '-q', 'doctr_remote', deploy_branch])
