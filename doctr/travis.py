@@ -216,7 +216,7 @@ def create_deploy_branch(deploy_branch):
     Return True if branch was created, False if not.
     Default value for deploy_branch is ``gh-pages``
     """
-    if not deploy_branch_exists():
+    if not deploy_branch_exists(deploy_branch):
         print("Creating {} branch".format(deploy_branch))
         run(['git', 'checkout', '--orphan', deploy_branch])
         # delete everything in the new ref.  this is non-destructive to existing
