@@ -6,7 +6,7 @@ env:
     - DOCS="true"
     - TESTS="true"
   global:
-    - secure: "Q4/CS/5/BhPbZdH7hjJooF0ucmlSMyM+iDJsmrAsZPI4lBccIEWHoWrqReCWn8AgxvfUMvZ1+PwIsPn47lftfX0zdOsJ92p8P8QovM9BRRf1I+/3imNWvWrAvwkRKWiNblfHPddjcv6TYwl/eQhNS56+wwabAcVmkPljc0iZS6MLCxwdkmcfrwA6DM7nNtofeb60XKBxOVXZ4ASUitIqUyH6CyVmTkV3bvjbeTPpp6vCxybAj/HsgaiqG1q8vbUWGK9Ie5eqm18CJ03M/yVd/St6cwApPcBhSzAnQDSAySKqC0Xesp8nDVC0HQ9S8NxtZyG36+PK7v3shiosvkZR7x7pJUBUZiMV7Bb5DNEUCUqdnXlZ3E5cBHwF7hRM2e4GGM47aQWAhCBwRwr7wowDz5oORfj4oei7bI32xLE0i3DKU1D3IXUFiartqjIZqzky4IGm8wdEWOroN1fd1uR1DPLkNgt9QPlNpX8BrWXUd89iSe+n+QUVoalZciR/QH7MSOXbFBwaUFacPm8b1bTxTFGalqfeMvrJNoBJqcHX0WlXlszAoOFnlwQguBoiVnmxT5KAlmskukHAa1cdHVrGGFei5ucTieeR/U+OZMbL4nrziMYIjyT4BFyI05QiS4D8CqcnJm4TZsejVlptZpEWwYI7e/w/y2J0yXaM7S8cf1g="
+  - secure: "bAlhfcSJB7M790tVu1qOSaWUpoTfpmfesmDbOyQeniHsqow6jCjkkKxvEe5uDoeb1sCEyxiTA6/qO+Oc06/Ny1ODfah5LOFAfBw7Yr5O/ewUHYBuEuaTCj0kCQPQtJ348JGrLTZK3eiIRDYwXCplMCogQ/FpHgPKlVYFPkJ1v1ttPH4ZaIE6hT68X/43MHZ6QBvIK9PHd+tUN9/YPjmuAGnmaEbf0X2O8vz5xCVey+wpHzviy9nAtmHaDuiQYfx6HolNhAG0dLxOY/DwzbjGwljzTkqR1SUo3ex4Q7itt2Xpto+S1LvPdWl91nX9jX6uCi7rOD0Qko8omU5bW1KNupj45yFpCgrWDR4hw/BYGz6vvNkT6ZSiRRt0IYS+ZNA4JTwL9A8iu19z8bJS1i1lreM8QsVZR9IRXvyyz/EUco+0RRr9h3UpeSFCnDesMGTzjoDkijUaW0LlfRpr4B3fqgyK5EvOucZrsWLPc2hIdv2BjwSw2/4SmbX5qcufnTvQefxQ2+AbPwftxYAdQX2WCLpa/a/hLZqgGyabnWiXmJUUxiiiJrr1K5h7FPAMUIx4cDsBBVEYaNbVmOUJ3pyucycVIhf58fe7DGxSvP1O830qe/comDsnnfHYQVfE9IuFVtt3jomnuimhz1KGGkrXI0eqGrQJppVEgzbzEDN1cFA="
 
 
 install:
@@ -28,10 +28,7 @@ script:
       cd docs;
       make html;
       cd ..;
-      python -m doctr deploy --gh-pages-docs . --key-path deploy_key.enc;
-      python -m doctr deploy --gh-pages-docs docs --key-path deploy_key.enc;
-      python -m doctr deploy --no-require-master --gh-pages-docs "docs-$TRAVIS_BRANCH" --built-docs docs/_build/html --key-path deploy_key.enc;
-      python -m doctr deploy --no-require-master --key-path deploy_key.enc --no-sync --command "echo test";
+      python -m doctr deploy --deploy-repo gforsyth/doctr_test_deploy --deploy-branch master;
     fi
   - if [[ "${TESTS}" == "true" ]]; then
       pyflakes doctr;
