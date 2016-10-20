@@ -206,6 +206,7 @@ def deploy_branch_exists(deploy_branch='gh-pages'):
     """
     remote_name = 'doctr_remote'
     branch_names = subprocess.check_output(['git', 'branch', '-r']).decode('utf-8').split()
+    print(branch_names)
 
     return '{remote}/{branch}'.format(remote=remote_name,
                                       branch=deploy_branch) in branch_names
