@@ -346,4 +346,5 @@ def push_docs(deploy_branch='gh-pages'):
     print("Pulling")
     run(['git', 'pull', 'doctr_remote', deploy_branch])
     print("Pushing commit")
+    run(['git', 'repack'])
     run(['git', 'push', '-q', 'doctr_remote', deploy_branch])
